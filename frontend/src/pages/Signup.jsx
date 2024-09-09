@@ -1,4 +1,3 @@
-import React from 'react'
 import {Box, Button, Flex, Heading, Text, useColorModeValue} from "@chakra-ui/react"
 import { FaGithub } from "react-icons/fa";
 import { Link } from 'react-router-dom';
