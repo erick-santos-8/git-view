@@ -8,7 +8,7 @@ import Logout from "./Logout"
 const Sidebar = () => {
   const {colorMode, toggleColorMode} = useColorMode();
 
-  const authUser = false;
+  const authUser = true;
 
   return (
     <Flex as={"aside"} bg={useColorModeValue("#e6e9ef", "#313244")} h={"100vh"} flexDir={"column"} alignItems={"center"} position={"sticky"} pt={"0"} mt={"0"} py={"10"} ml={"0"} minW={{base: "12", md: "16"}} overflowY={"auto"} borderRight={"1px solid"} borderRightColor={"#bcc0cc"}  transition={".5s"}>
