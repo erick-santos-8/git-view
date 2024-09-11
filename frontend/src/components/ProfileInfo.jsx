@@ -1,6 +1,7 @@
 import {Box, Flex, Image, Link, Text, useColorModeValue} from '@chakra-ui/react';
 import { TfiEye, TfiThought, TfiMapAlt } from "react-icons/tfi";
 import { FaXTwitter } from "react-icons/fa6";
+import { RiUserFollowLine, RiUserFollowFill, RiGitRepositoryFill } from "react-icons/ri";
 
 const ProfileInfo = () => {
   const userProfile = {
@@ -20,7 +21,7 @@ const ProfileInfo = () => {
 
   return (
     <Flex position={{md:"sticky"}} w={{base:"100%", lg:"33%"}} flexDir={"column"} gap={"2"} top={{md:"10"}}>
-      <Box rounded={"lg"} p={"4"} bg={useColorModeValue("gray.50", "#313244")} shadow={"2xl"}>
+      <Box rounded={"lg"} p={"4"} bg={useColorModeValue("gray.50", "#313244")} shadow={"lg"}>
         <Flex alignItems={"center"} gap={"3"}>
           <Link href={userProfile?.html_url} target='_blank' rel='noreferrer'>
             <Image src={userProfile?.avatar_url} rounded={"md"} w={"24"} h={"24"} mb={"2"} alt=''/>
@@ -74,14 +75,34 @@ const ProfileInfo = () => {
           </Box>
         )}
 
-        <Box my={"2"}>
+        <Box mt={"2"}>
           <Text fontWeight={"bold"} fontSize={"sm"} opacity={".7"}>Usuário:</Text>
           <Text>{userProfile.login}</Text>
         </Box>
         
-    
       </Box>
+      <Flex flexWrap={"wrap"} gap={"2"} mx={"4"} bg={"#a6e3a1"} rounded={"md"} color={"#4c4f69"} shadow={"md"} py={"1"}>
+        <Flex alignItems={"center"} gap={"2"} rounded={"lg"} p={"2"} flex={"1"} minW={"24"}>
+          <RiUserFollowLine width={"5"} h={"5"} />
+          <Text fontSize={"sm"} >Seguindo: {userProfile?.following}</Text>
+        </Flex>
 
+        <Flex alignItems={"center"} gap={"2"} rounded={"lg"} p={"2"} flex={"1"} minW={"24"}>
+          <RiUserFollowFill width={"5"} h={"5"} />
+          <Text fontSize={"sm"} >Seguidores: {userProfile?.followers}</Text>
+        </Flex>
+
+        <Flex alignItems={"center"} gap={"2"} rounded={"lg"} p={"2"} flex={"1"} minW={"24"}>
+          <RiGitRepositoryFill width={"5"} h={"5"} />
+          <Text fontSize={"sm"} >Repositórios públicos: {userProfile?.public_repos}</Text>
+        </Flex>
+
+        <Flex alignItems={"center"} gap={"2"} rounded={"lg"} p={"2"} flex={"1"} minW={"24"}>
+          <RiGitRepositoryFill width={"5"} h={"5"} />
+          <Text fontSize={"sm"} >Gists públicos: {userProfile?.public_gists}</Text>
+        </Flex>
+
+      </Flex>
     </Flex>
   )
 }
