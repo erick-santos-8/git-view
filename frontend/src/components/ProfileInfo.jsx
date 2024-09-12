@@ -6,20 +6,6 @@ import { RiUserFollowLine, RiUserFollowFill, RiGitRepositoryFill } from "react-i
 import { formatMemberSince } from '../utils/functions';
 
 const ProfileInfo = ({userProfile}) => {
-  // const userProfile = {
-	// 	avatar_url: "https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745",
-	// 	bio: "👨🏻‍💻👨🏻‍💻👨🏻‍💻",
-	// 	email: "johndoe@gmail.com",
-	// 	followers: 100,
-	// 	following: 200,
-	// 	html_url: "https://github.com/burakorkmez",
-	// 	location: "Somewhere, Earth",
-	// 	name: "John Doe",
-	// 	public_gists: 100,
-	// 	public_repos: 100,
-	// 	twitter_username: "johndoe",
-	// 	login: "johndoe",
-	// };
 
   if(!userProfile){
     return(
@@ -27,7 +13,6 @@ const ProfileInfo = ({userProfile}) => {
     )
   }
   else{
-    console.log(userProfile)
   const formattedMemberSince = formatMemberSince(userProfile?.created_at);
 
   return (

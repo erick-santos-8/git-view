@@ -1,8 +1,6 @@
-import React from 'react'
-import {Box, Button, Flex, Img, useColorMode, useColorModeValue} from "@chakra-ui/react"
+import { Button, Flex, useColorMode, useColorModeValue} from "@chakra-ui/react"
 import { Link } from 'react-router-dom'
 import { TfiGithub, TfiHeart, TfiHome, TfiPalette, TfiUser, TfiWorld, TfiWrite } from "react-icons/tfi";
-import {VscColorMode} from "react-icons/vsc"
 import Logout from "./Logout"
 
 const Sidebar = () => {
@@ -11,7 +9,7 @@ const Sidebar = () => {
   const authUser = true;
 
   return (
-    <Flex as={"aside"} bg={useColorModeValue("#e6e9ef", "#313244")} h={"100vh"} flexDir={"column"} alignItems={"center"} position={"sticky"} pt={"0"} mt={"0"} py={"10"} ml={"0"} minW={{base: "12", md: "16"}} overflowY={"auto"} borderRight={"1px solid"} borderRightColor={"#bcc0cc"}  transition={".5s"}>
+    <Flex as={"aside"} bg={useColorModeValue("#e6e9ef", "#313244")} h={"100vh"} flexDir={"column"} alignItems={"center"} position={"sticky"} pt={"0"} mt={"0"} py={"10"} ml={"0"} minW={{base: "12", md: "16"}} overflowY={"auto"} borderRight={"1px solid"} borderRightColor={"#bcc0cc"}  transition={".5s"} top={"0"} left={"0"}>
       <Flex h={"full"} flexDir={"column"} gap={"3"}>
 
         <Flex justifyContent={"center"} _hover={{color:useColorModeValue("black", "white")}} transition={".5s"}>
