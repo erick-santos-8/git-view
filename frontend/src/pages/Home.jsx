@@ -57,6 +57,7 @@ const Home = () => {
 
   useEffect(()=>{
     getProfile();
+    console.log("profile")
   },[]);
 
   useEffect(()=>{

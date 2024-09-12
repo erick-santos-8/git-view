@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Flex, Img, Link, ListItem, Text, useColorModeValue } from '@chakra-ui/react'
+import { Flex, Img, Link, ListItem, Text, useBreakpointValue, useColorModeValue } from '@chakra-ui/react'
 import { FaCodeBranch, FaCopy, FaRegStar } from "react-icons/fa";
 import { FaCodeFork } from "react-icons/fa6";
 import { formatDate } from '../utils/functions';
@@ -31,8 +31,8 @@ const Repo = ({ repo }) => {
         <Text as={"span"} bg={"#94e2d5"} color={"#4c4f69"} fontSize={{base:"xs", lg:"md"}} px={"1"} py={"-0.5"} rounded={"full"} display={"flex"} alignItems={"center"} gap={"1"} >
           <FaCodeFork /> {repo.forks_count}
         </Text>
-        <Text as={"span"} bg={"#cba6f7"} color={"#4c4f69"} fontSize={{base:"xs", lg:"md"}} px={"1"} py={"-0.5"} rounded={"full"} display={"flex"} alignItems={"center"} gap={"1"} >
-          <FaCopy /> <Text>{isSmallScreen ? "Clone" : ""}</Text>
+        <Text as={"span"} bg={"#cba6f7"} color={"#4c4f69"} fontSize={{base:"sm", lg:"md"}} px={{base:"1", md:"1"}} py={{base:"0.5", md:"-0.5"}} rounded={"full"} display={"flex"} alignItems={"center"} gap={"1"} >
+          <FaCopy /> <Text>{isSmallScreen ? "": "Clone"}</Text>
         </Text>
 
       </Flex>
