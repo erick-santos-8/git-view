@@ -14,13 +14,13 @@ const Home = () => {
 
   const toast = useToast();
   
-  const getProfile = async () => {
+  const getProfile = async (username="erick-santos-8") => {
     setLoading(true)
     try {
-      const res = await fetch("https://api.github.com/users/erick-santos-8")
+      const res = await fetch(`https://api.github.com/users/${username}`)
       const data = await res.json();
       setUserProfile(data);
-            
+      // return userProfile
       
     } catch (error) {
       toast({
@@ -41,6 +41,8 @@ const Home = () => {
       const resRepos = await fetch(reposUrl);
       const dataRepos = await resRepos.json();
       setRepos(dataRepos);
+
+      // return repos;
       
     } catch (error) {
       toast({
@@ -66,14 +68,27 @@ const Home = () => {
     }
   }, [userProfile])
 
+  const onSearch = async(e, username) => {
+    e.preventDefault();
+
+    setLoading(true);
+    setRepos([]);
+    setUserProfile(null);
+
+    // const repos = await getRepos(userProfile.repos_url);
+    
+    setUserProfile(username);
+    await getProfile(username);
+  }
+
   
   return (
     <Box m={"4"}>
-      <Search/>
+      <Search onSearch={onSearch}/>
       <SortRepos/>
       <Flex gap={"4"} flexDir={{base: "column", lg:"row"}} justifyContent={"center"} alignItems={"start"}>
         {userProfile && !loading && <ProfileInfo userProfile={userProfile}/>}
-        {repos.length > 0 && !loading && <Repos repos={repos}/>}
+        {!loading && <Repos repos={repos}/>}
         {loading && <Spinner/>}
       </Flex>
     </Box>
