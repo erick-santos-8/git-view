@@ -1,30 +1,41 @@
-import {Box, Flex, Image, Link, Text, useColorModeValue} from '@chakra-ui/react';
+/* eslint-disable react/prop-types */
+import {Box, Flex, Image, Link, Spinner, Text, useColorModeValue} from '@chakra-ui/react';
 import { TfiEye, TfiThought, TfiMapAlt } from "react-icons/tfi";
 import { FaXTwitter } from "react-icons/fa6";
 import { RiUserFollowLine, RiUserFollowFill, RiGitRepositoryFill } from "react-icons/ri";
+import { formatMemberSince } from '../utils/functions';
 
-const ProfileInfo = () => {
-  const userProfile = {
-		avatar_url: "https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745",
-		bio: "👨🏻‍💻👨🏻‍💻👨🏻‍💻",
-		email: "johndoe@gmail.com",
-		followers: 100,
-		following: 200,
-		html_url: "https://github.com/burakorkmez",
-		location: "Somewhere, Earth",
-		name: "John Doe",
-		public_gists: 100,
-		public_repos: 100,
-		twitter_username: "johndoe",
-		login: "johndoe",
-	};
+const ProfileInfo = ({userProfile}) => {
+  // const userProfile = {
+	// 	avatar_url: "https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745",
+	// 	bio: "👨🏻‍💻👨🏻‍💻👨🏻‍💻",
+	// 	email: "johndoe@gmail.com",
+	// 	followers: 100,
+	// 	following: 200,
+	// 	html_url: "https://github.com/burakorkmez",
+	// 	location: "Somewhere, Earth",
+	// 	name: "John Doe",
+	// 	public_gists: 100,
+	// 	public_repos: 100,
+	// 	twitter_username: "johndoe",
+	// 	login: "johndoe",
+	// };
+
+  if(!userProfile){
+    return(
+      <Spinner/>
+    )
+  }
+  else{
+    console.log(userProfile)
+  const formattedMemberSince = formatMemberSince(userProfile?.created_at);
 
   return (
     <Flex position={{md:"sticky"}} w={{base:"100%", lg:"33%"}} flexDir={"column"} gap={"2"} top={{md:"10"}}>
       <Box rounded={"lg"} p={"4"} bg={useColorModeValue("gray.50", "#313244")} shadow={"lg"}>
         <Flex alignItems={"center"} gap={"3"}>
           <Link href={userProfile?.html_url} target='_blank' rel='noreferrer'>
-            <Image src={userProfile?.avatar_url} rounded={"md"} w={"24"} h={"24"} mb={"2"} alt=''/>
+            <Image src={userProfile?.avatar_url} rounded={"md"} w={"24"} h={"24"} mb={"2"} alt='' border={"solid 1px #9399b2"}/>
           </Link>
 
           <Flex gap={"2"} alignItems={"center"} flexDir={"column"}>
@@ -58,7 +69,7 @@ const ProfileInfo = () => {
 
         <Box my={"2"}>
           <Text fontWeight={"bold"} fontSize={"sm"} opacity={".7"}>Membro desde:</Text>
-          <Text>22 Jan, 2021</Text>
+          <Text>{formattedMemberSince}</Text>
         </Box>
 
         {userProfile.email && (
@@ -105,6 +116,7 @@ const ProfileInfo = () => {
       </Flex>
     </Flex>
   )
+}
 }
 
 export default ProfileInfo

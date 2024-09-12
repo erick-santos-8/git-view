@@ -1,4 +1,4 @@
-import {Box, Flex, useToast} from "@chakra-ui/react"
+import {Box, Flex, Spinner, useToast} from "@chakra-ui/react"
 import Search from "../components/Search";
 import SortRepos from "../components/SortRepos"
 import ProfileInfo from "../components/ProfileInfo"
@@ -13,20 +13,14 @@ const Home = () => {
   const [sortType, setSortType] = useState("recents");
 
   const toast = useToast();
-  const getProfileAndRepos = useCallback(async () => {
+  
+  const getProfile = async () => {
     setLoading(true)
     try {
       const res = await fetch("https://api.github.com/users/erick-santos-8")
       const data = await res.json();
       setUserProfile(data);
-      
-      
-      const resRepos = await fetch(userProfile.repos_url);
-      const dataRepos = await resRepos.json();
-      setRepos(dataRepos);
-
-      console.log("user", userProfile)
-      console.log("repos", repos);
+            
       
     } catch (error) {
       toast({
@@ -39,19 +33,47 @@ const Home = () => {
     }finally{
       setLoading(false);
     }
-  },[])
+  }
+
+  const getRepos = async (reposUrl) => {
+    setLoading(true);
+    try {
+      const resRepos = await fetch(reposUrl);
+      const dataRepos = await resRepos.json();
+      setRepos(dataRepos);
+      
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: error.message,
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+    }finally{
+      setLoading(false);
+    }
+  }
 
   useEffect(()=>{
-    getProfileAndRepos();
-  },[getProfileAndRepos])
+    getProfile();
+  },[]);
+
+  useEffect(()=>{
+    if(userProfile && userProfile.repos_url){
+      getRepos(userProfile.repos_url)
+    }
+  }, [userProfile])
+
+  
   return (
     <Box m={"4"}>
       <Search/>
       <SortRepos/>
-
-      <Flex gap={"4"} flexDir={{base: "column", lg:"row"}} justifyContent={"center"} alignItems={"center"}>
-        <ProfileInfo/>
-        <Repos/>
+      <Flex gap={"4"} flexDir={{base: "column", lg:"row"}} justifyContent={"center"} alignItems={"start"}>
+        {userProfile && !loading && <ProfileInfo userProfile={userProfile}/>}
+        {repos.length > 0 && !loading && <Repos repos={repos}/>}
+        {loading && <Spinner/>}
       </Flex>
     </Box>
   )
