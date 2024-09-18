@@ -16,7 +16,7 @@ const ProfileInfo = ({userProfile}) => {
   const formattedMemberSince = formatMemberSince(userProfile?.created_at);
 
   return (
-    <Flex position={{md:"sticky"}} w={{base:"100%", lg:"33%"}} flexDir={"column"} gap={"2"} top={{md:"10"}}>
+    <Flex position={{lg:"sticky"}} w={{base:"100%", lg:"33%"}} flexDir={"column"} gap={"2"} top={{md:"10"}}>
       <Box rounded={"lg"} p={"4"} bg={useColorModeValue("gray.50", "#313244")} shadow={"lg"}>
         <Flex alignItems={"center"} gap={"3"}>
           <Link href={userProfile?.html_url} target='_blank' rel='noreferrer'>

@@ -9,7 +9,7 @@ const Search = ({onSearch}) => {
 
   return (
     <form onSubmit={(e) => onSearch(e, username)}>
-    <InputGroup maxW={"xl"} mx={"auto"} w={{sm:"80"}} display={"flex"} justifyContent={"center"} alignItems={"center"}>
+    <InputGroup maxW={"xl"} mx={"auto"} w={{sm:"80"}} display={"flex"} justifyContent={"center"} alignItems={"center"} mb={"1"}>
       <Input placeholder="Buscar" type="search" id="default-search" focusBorderColor="#a6e3a1" value={username} onChange={(e) => setUsername(e.target.value)} />
       <InputRightElement w={"15"}>
         <Button bg={useColorModeValue("#a6e3a1","#a6e3a1")} color={"black"} _hover={{bg:"#B0E3AC"}} borderLeftRadius={"none"} h={"100%"} w={"100%"} type="submit">

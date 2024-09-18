@@ -82,10 +82,21 @@ const Home = () => {
   }
 
   
+  const onSort = (sortType) => {
+    if(sortType === "recents"){
+      repos.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+    }else if(sortType === "stars"){
+      repos.sort((a, b) => b.stargazers_count - a.stargazers_count);
+    }else if(sortType === "forks"){
+      repos.sort((a, b) => b.forks_count - a.forks_count);
+    }
+    setSortType(sortType);
+    setRepos([...repos]);
+  }
   return (
     <Box m={"4"}>
       <Search onSearch={onSearch}/>
-      <SortRepos/>
+      {repos.length > 0 && <SortRepos onSort={onSort} sortType={sortType}/>}
       <Flex gap={"4"} flexDir={{base: "column", lg:"row"}} justifyContent={"center"} alignItems={"start"}>
         {userProfile && !loading && <ProfileInfo userProfile={userProfile}/>}
         {!loading && <Repos repos={repos}/>}
